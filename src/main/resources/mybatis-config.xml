@@ -14,7 +14,9 @@
   		<package name="com.ssm.crud.pojo"/>
   	</typeAliases>
   	
-  	
+  	<plugins>
+  		<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+  	</plugins>
   	
   	
   	
