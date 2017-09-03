@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssm.crud.dao.EmployeeMapper;
 import com.ssm.crud.pojo.Employee;
+import com.ssm.crud.pojo.Msg;
 
 /**
 * @author zhuxindong  E-mail:501801307@qq.com
@@ -29,6 +31,17 @@ public class EmployeeService {
 		return employeeMapper.selectByExampleWithDept(null);		
 		
 	}
+	
+	
+	/**
+	 * 保存新员工
+	 * @param employee
+	 */
+	public void saveEmp(Employee employee) {
+		// TODO Auto-generated method stub
+		employeeMapper.insertSelective(employee);
+	}
+	
 	
 	
 	

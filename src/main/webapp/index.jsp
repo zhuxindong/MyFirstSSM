@@ -64,7 +64,7 @@
 			    <label class="col-sm-2 control-label">部门</label>
 			    <div class="col-sm-4">
 			       <!--提交部门ID -->
-			      <select class="form-control" name="dId">
+			      <select class="form-control" name="dId" id="dept_select">
 					  
 				  </select>
 			    </div>
@@ -86,7 +86,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-primary">保存</button>
+	        <button type="button" class="btn btn-primary" id="emp_save_btn">保存</button>
 	      </div>
 	    </div>
 	  </div>

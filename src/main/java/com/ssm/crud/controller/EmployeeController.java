@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -60,24 +61,18 @@ public class EmployeeController {
 	
 	
 
-	//@RequestMapping("/emps.html")
-	public String getEmps(@RequestParam(value="pn",defaultValue="1")Integer pn,
-							Model model){
-		
-		/**
-		 * 利用pagehelper分页插件来分页
-		 */
-		PageHelper.startPage(pn, 5);
-		
-		List<Employee> employees = employeeService.getAll();
-		
-		PageInfo page = new PageInfo(employees,5);
-		
-		model.addAttribute("pageinfo", page);
-		
-		return "list";
-		
+	/**
+	 * 保存一个新员工
+	 * @param employee
+	 * @return
+	 */
+	@RequestMapping(value="/emp",method=RequestMethod.POST)
+	@ResponseBody
+	public Msg saveEmp(Employee employee){
+		employeeService.saveEmp(employee);
+		return Msg.success();
 	}
+	
 
 	
 	

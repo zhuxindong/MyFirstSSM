@@ -4,12 +4,13 @@ $(function(){
 
 });
 
-
+var total_Pages;
 
 function build_emps_table(argument) {
 	// body...
 	$('#emps_table tbody').empty();
 	var emps = argument.extend.pageinfo.list;
+	total_Pages = argument.extend.pageinfo.pages;
 	$.each(emps, function(index, val) {
 		 /* iterate through array or object */
 		 var empId_td = $('<td></td>').append(val.empId);
@@ -185,7 +186,7 @@ function build_page_nav(argument) {
 
 	var page_nav = $('<nav></nav>').append(page_ul);
 
-	page_nav.appendTo('#page_nav_area')
+	page_nav.appendTo('#page_nav_area');
 
 }
 
@@ -194,8 +195,63 @@ $(function(){
 
 	$('#emp_add_btn').click(function(event) {
 	/* Act on the event */
+
+	$.ajax({
+		url: 'depts',
+		type: 'GET',
+		success:function(result){
+
+			$('#dept_select').empty();
+
+			$.each(result.extend.depts, function(index, val) {
+				 /* iterate through array or object */
+				 var dept_option = $('<option></option>').append(val.deptName).attr('value',val.deptId);
+
+				 dept_option.appendTo('#dept_select');
+			});
+
+
+		}
+	});
+	
+	
+
+
+
 		$('#empAddModal').modal({
 			backdrop:'static'
 		});
 	});
+});
+
+
+
+
+$(function(){
+
+	$('#emp_save_btn').click(function(event) {
+	/* Act on the event */
+
+
+
+
+	$.ajax({
+		url: 'emp',
+		type: 'POST',
+		data: $('#empAddModal form').serialize(),
+		success:function(result){
+
+			if (result.code == '100') { alert('保存成功!')}
+
+			$('#empAddModal').modal('hide');
+
+			to_page(total_Pages);
+
+		}
+	});
+
+
+
+});
+
 });
