@@ -47,54 +47,7 @@ function build_page_info(argument) {
 
 
 
-// function build_page_nav(argument) {
-// 	// body...
-// 	var clearactive = document.getElementsByTagName('li');
-// 	for (var i = clearactive.length - 1; i >= 0; i--) {
-// 		$(clearactive[i]).removeClass('active');
-// 	}
 
-
-// 	$('#nav_1 a').text(argument.extend.pageinfo.navigatepageNums[0]);
-// 	$('#nav_1 a').click(function(event) {
-// 		/* Act on the event */
-// 		to_page(argument.extend.pageinfo.navigatepageNums[0])
-// 	});
-// 	if (argument.extend.pageinfo.navigatepageNums[0]==argument.extend.pageinfo.pageNum) {$('#nav_1').addClass('active')}
-
-// 	$('#nav_2 a').text(argument.extend.pageinfo.navigatepageNums[1]);
-// 	$('#nav_2 a').click(function(event) {
-// 		/* Act on the event */
-// 		to_page(argument.extend.pageinfo.navigatepageNums[1])
-// 	});
-// 	if (argument.extend.pageinfo.navigatepageNums[1]==argument.extend.pageinfo.pageNum) {$('#nav_2').addClass('active')}
-
-// 	$('#nav_3 a').text(argument.extend.pageinfo.navigatepageNums[2]);
-// 	$('#nav_3 a').click(function(event) {
-// 		/* Act on the event */
-// 		to_page(argument.extend.pageinfo.navigatepageNums[2])
-// 	});
-// 	if (argument.extend.pageinfo.navigatepageNums[2]==argument.extend.pageinfo.pageNum) {$('#nav_3').addClass('active')}
-
-// 	$('#nav_4 a').text(argument.extend.pageinfo.navigatepageNums[3]);
-// 	$('#nav_4 a').click(function(event) {
-// 		/* Act on the event */
-// 		to_page(argument.extend.pageinfo.navigatepageNums[3])
-// 	});
-// 	if (argument.extend.pageinfo.navigatepageNums[3]==argument.extend.pageinfo.pageNum) {$('#nav_4').addClass('active')}
-
-// 	$('#nav_5 a').text(argument.extend.pageinfo.navigatepageNums[4]);
-// 	$('#nav_5 a').click(function(event) {
-// 		/* Act on the event */
-// 		to_page(argument.extend.pageinfo.navigatepageNums[4])
-// 	});
-// 	if (argument.extend.pageinfo.navigatepageNums[4]==argument.extend.pageinfo.pageNum) {$('#nav_5').addClass('active')}
-
-	
-// 	if (argument.extend.pageinfo.hasPreviousPage == false) {$('#nav_go_pre').addClass('disabled')}
-// 	if (argument.extend.pageinfo.hasNextPage == false) {$('#nav_go_next').addClass('disabled')}
-
-// }
 
 
 function to_page(argument) {
@@ -255,3 +208,13 @@ $(function(){
 });
 
 });
+
+
+function validate_add_form(argument) {
+	// body...
+	var emp_Name = $('#emp_name_input').val();
+
+	var reg_name = /(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,6})/ ;
+
+
+}

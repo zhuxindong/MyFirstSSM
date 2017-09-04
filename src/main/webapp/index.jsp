@@ -42,7 +42,7 @@
 			  <div class="form-group">
 			    <label class="col-sm-2 control-label">邮箱</label>
 			    <div class="col-sm-10">
-			      <input type="text" name="email" class="form-control" id="emp_name_input" placeholder="员工邮箱">
+			      <input type="text" name="email" class="form-control" id="emp_email_input" placeholder="员工邮箱">
 			    </div>
 			  </div>
 
