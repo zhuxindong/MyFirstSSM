@@ -25,7 +25,10 @@ public class DepartmentController {
 	
 	
 	
-	
+	/**
+	 * 查询所有部门信息
+	 * @return
+	 */
 	@RequestMapping("/depts")
 	@ResponseBody
 	public Msg getDepts(){
