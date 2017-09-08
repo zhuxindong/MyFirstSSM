@@ -31,9 +31,9 @@ public class EmployeeController {
 	
 	
 	/**
+	 * 分页查询所有员工信息，连带其部门信息一起查询
 	 * 用来返回json数据
 	 * @param pn
-
 	 * @return
 	 */
 	@RequestMapping("/emps")
