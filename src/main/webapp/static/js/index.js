@@ -185,7 +185,10 @@ $(function(){
 	$('#emp_save_btn').click(function(event) {
 	/* Act on the event */
 
+	if (!validate_add_form()) {
 
+		return false;
+	}
 
 
 	$.ajax({
@@ -210,11 +213,57 @@ $(function(){
 });
 
 
+// 校验表单数据
 function validate_add_form(argument) {
 	// body...
 	var emp_Name = $('#emp_name_input').val();
+	var emp_email = $('#emp_email_input').val();
 
 	var reg_name = /(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,6})/ ;
+	var reg_email = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 
+	if (!reg_name.test(emp_Name)) {
+		// alert("用户名可以使2到6位中文或3到16位英文和数字的组合！");
+		show_validate_msg('#emp_name_input','error','用户名可以使2到6位中文或3到16位英文和数字的组合！');
+		
+		return false;
+	}else{
+		
+		show_validate_msg('#emp_name_input','success','');
+		
+	}
+
+
+	if (!reg_email.test(emp_email)) {
+		// alert("邮箱格式不正确！");
+		show_validate_msg('#emp_email_input','error','邮箱格式不正确！');
+		
+		return false;
+	}else{
+
+		show_validate_msg('#emp_email_input','success','');
+		
+	}
+
+
+	return true;
+}
+
+
+function show_validate_msg(ele,status,msg) {
+	// body...
+	$(ele).parent().removeClass('has-success has-error');
+	$(ele).next("span").text('');
+	if ("success" == status) {
+
+		$(ele).parent().addClass('has-success');
+		$(ele).next("span").text(msg);
+
+	}else if ("error" == status) {
+
+		$(ele).parent().addClass('has-error');
+		$(ele).next("span").text(msg);
+
+	}
 
 }

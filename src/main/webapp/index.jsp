@@ -36,6 +36,7 @@
 			    <label class="col-sm-2 control-label">员工姓名</label>
 			    <div class="col-sm-10">
 			      <input type="text" name="empName" class="form-control" id="emp_name_input" placeholder="员工姓名">
+			      <span class="help-block"></span>
 			    </div>
 			  </div>
 			
@@ -43,6 +44,7 @@
 			    <label class="col-sm-2 control-label">邮箱</label>
 			    <div class="col-sm-10">
 			      <input type="text" name="email" class="form-control" id="emp_email_input" placeholder="员工邮箱">
+			      <span class="help-block"></span>
 			    </div>
 			  </div>
 
@@ -71,12 +73,6 @@
 			</div>
 
 			  
-			  
-			  <div class="form-group">
-			    <div class="col-sm-offset-2 col-sm-10">
-			      <button type="submit" class="btn btn-default">Sign in</button>
-			    </div>
-			  </div>
 			</form>
 
 
