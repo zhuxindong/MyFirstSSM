@@ -63,6 +63,10 @@ public class EmployeeController {
 
 	/**
 	 * 保存一个新员工
+	 * 
+	 * 1.支持JSR303校验
+	 * 2.导入Hibernate-validator
+	 * 
 	 * @param employee
 	 * @return
 	 */
@@ -75,6 +79,34 @@ public class EmployeeController {
 	
 
 	
+	/**
+	 * 查询姓名是否可用
+	 * @param empName
+	 * @return
+	 */
+	@RequestMapping("/checkuser")
+	@ResponseBody
+	public Msg checkUser(@RequestParam(value="empName") String empName){
+		
+		/**
+		 * 先判断用户名是否合法
+		 */
+		String regx = "(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,6})";
+		if (!empName.matches(regx)) {
+			return Msg.fail().add("msg", "用户名必须是2到6位中文或3到16位英文和数字的组合");
+		}
+		
+		/**
+		 * 数据库用户名重复校验
+		 */
+		boolean b = employeeService.chechUser(empName);
+		
+		if (b) {
+			return Msg.success();
+		}else {
+			return Msg.fail().add("msg", "用户名不可用");
+		}
+	}
 	
 	
 	

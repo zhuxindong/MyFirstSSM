@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ssm.crud.dao.EmployeeMapper;
 import com.ssm.crud.pojo.Employee;
+import com.ssm.crud.pojo.EmployeeExample;
+import com.ssm.crud.pojo.EmployeeExample.Criteria;
 import com.ssm.crud.pojo.Msg;
 
 /**
@@ -40,6 +42,24 @@ public class EmployeeService {
 	public void saveEmp(Employee employee) {
 		// TODO Auto-generated method stub
 		employeeMapper.insertSelective(employee);
+	}
+
+	
+	/**
+	 * 检验用户名是否可用
+	 * @param empName
+	 * @return true代表可用
+	 */
+	public boolean chechUser(String empName) {
+		
+		EmployeeExample example = new EmployeeExample();
+		
+		Criteria criteria = example.createCriteria();
+		criteria.andEmpNameEqualTo(empName);
+		
+		long count = employeeMapper.countByExample(example);
+		
+		return count == 0;
 	}
 	
 	

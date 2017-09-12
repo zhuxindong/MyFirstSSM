@@ -74,12 +74,14 @@ function to_page(argument) {
 
 
 
+// 构建分页条信息
 function build_page_nav(argument) {
 
 	$('#page_nav_area').empty();
 
 	var page_ul = $('<ul></ul>').addClass('pagination');
 
+	// 首页
 	var firstPage_li = $('<li></li>').append($('<a></a>').append('首页').attr('href','#'));
 	firstPage_li.click(function(event) {
 		/* Act on the event */
@@ -87,7 +89,7 @@ function build_page_nav(argument) {
 	});
 
 
-
+	// 尾页
 	var lastPage_li = $('<li></li>').append($('<a></a>').append('末页').attr('href','#'));
 	lastPage_li.click(function(event) {
 		/* Act on the event */
@@ -96,7 +98,7 @@ function build_page_nav(argument) {
 
 
 
-
+	// 是否有前一页
 	if (argument.extend.pageinfo.hasPreviousPage == true) {
 		var prePage_li = $('<li></li>').append($('<a></a>').append('&laquo;').attr('href','#'));
 
@@ -107,6 +109,7 @@ function build_page_nav(argument) {
 
 	}
 	
+	// 是否有后一页
 	if (argument.extend.pageinfo.hasNextPage == true) {
 		var nextPage_li = $('<li></li>').append($('<a></a>').append('&raquo;').attr('href','#'));
 
@@ -120,6 +123,8 @@ function build_page_nav(argument) {
 
 	page_ul.append(firstPage_li).append(prePage_li);
 
+
+	// 循环构建分页按钮信息
 	$.each(argument.extend.pageinfo.navigatepageNums, function(index, val) {
 		 /* iterate through array or object */
 		 var num_li = $('<li></li>').append($('<a></a>').append(val).attr('href','#'));
@@ -144,10 +149,16 @@ function build_page_nav(argument) {
 }
 
 
+// ajax查询部门信息
 $(function(){
 
 	$('#emp_add_btn').click(function(event) {
 	/* Act on the event */
+
+	// 清楚表单数据
+	$('#empAddModal form')[0].reset();
+
+
 
 	$.ajax({
 		url: 'depts',
@@ -179,7 +190,52 @@ $(function(){
 
 
 
+// ajax查询员工姓名是否可用(被注册)
+$(function(){
 
+	$('#emp_name_input').change(function() {
+	// body...
+	var empName = this.value;
+	$.ajax({
+		url:'checkuser',
+		data:{'empName':empName},
+		type:'POST',
+		success:function(result) {
+			// body...
+			if (result.code == 100) {
+
+				show_validate_msg('#emp_name_input','success','用户名可用');
+				$('#emp_save_btn').removeAttr('disabled');
+
+			}else{
+				show_validate_msg('#emp_name_input','error',result.extend.msg);
+				
+				$('#emp_save_btn').attr('disabled','disabled');
+			}
+
+		}
+
+	});
+
+
+});
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+//保存新员工
 $(function(){
 
 	$('#emp_save_btn').click(function(event) {
@@ -206,9 +262,7 @@ $(function(){
 		}
 	});
 
-
-
-});
+	});
 
 });
 
@@ -250,6 +304,7 @@ function validate_add_form(argument) {
 }
 
 
+// 显示校验结果信息
 function show_validate_msg(ele,status,msg) {
 	// body...
 	$(ele).parent().removeClass('has-success has-error');
@@ -267,3 +322,5 @@ function show_validate_msg(ele,status,msg) {
 	}
 
 }
+
+
