@@ -27,6 +27,7 @@ public class DepartmentController {
 	
 	/**
 	 * 查询所有部门信息
+	 * 返回json数据
 	 * @return
 	 */
 	@RequestMapping("/depts")
