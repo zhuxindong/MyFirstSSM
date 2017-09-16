@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- <script type="text/javascript" src="static/js/index.js"></script> -->
-<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.js"></script>
 
 <title>员工列表</title>
 </head>
@@ -128,13 +128,22 @@
 						</tr>
 					</thead>
 					
-					<tbody>
-						<tr id="emp-list-tr" v-for="e in list">
+					<tbody id="emp-list-tr" >
+						<tr v-for="e in list">
 							<th>{{e.empId}}</th>
 							<th>{{e.empName}}</th>
 							<th>{{e.gender}}</th>
 							<th>{{e.email}}</th>
-							<th>{{e.deptName}}</th>
+							<th>{{e.department.deptName}}</th>
+
+							<th><button class="btn btn-primary btn-sm">
+						 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						 		新增
+						 	</button>
+						 	<button class="btn btn-danger btn-sm">
+						 		<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						 		删除
+						 	</button></th>
 						</tr>
 
 
@@ -201,16 +210,16 @@
 
 	<script type="text/javascript">
 		
-
-
+	function to_page(argument) {
+		// body...
 		$.ajax({
 		url: 'emps',
 		type: 'GET',
-		data: {"pn": "1"},
+		data: {"pn": argument},
 		success:function(result){
-
+			console.log(result.extend.pageinfo.list);
 			new Vue({
-		
+			
 			el: "#emp-list-tr",
 			data:{
 				list:result.extend.pageinfo.list
@@ -221,6 +230,10 @@
 			
 
 		}
-	});
+		});
+	}
+
+	to_page(1);
+		
 
 	</script>

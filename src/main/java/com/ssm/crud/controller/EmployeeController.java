@@ -1,10 +1,17 @@
 package com.ssm.crud.controller;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,9 +79,34 @@ public class EmployeeController {
 	 */
 	@RequestMapping(value="/emp",method=RequestMethod.POST)
 	@ResponseBody
-	public Msg saveEmp(Employee employee){
-		employeeService.saveEmp(employee);
-		return Msg.success();
+	public Msg saveEmp(@Valid Employee employee,BindingResult result){
+		/*
+		 * 后台检验数据信息
+		 */
+		if (result.hasErrors()) {
+			/*
+			 * 如果校验失败，显示错误信息
+			 */
+			Map<String, Object> errMap = new HashMap<String, Object>();
+			List<FieldError> errors = result.getFieldErrors();
+			for (FieldError fieldError : errors) {
+				/*
+				 * 把错误信息封装成map对象
+				 */
+				errMap.put(fieldError.getField(), fieldError.getDefaultMessage());
+			}
+			
+			/*
+			 * 提交给浏览器
+			 */
+			return Msg.fail().add("errorFields", errMap);
+			
+		}else {
+			employeeService.saveEmp(employee);
+			return Msg.success();
+		}
+		
+		
 	}
 	
 

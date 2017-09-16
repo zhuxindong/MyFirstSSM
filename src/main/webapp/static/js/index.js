@@ -252,12 +252,22 @@ $(function(){
 		type: 'POST',
 		data: $('#empAddModal form').serialize(),
 		success:function(result){
+			// 成功
+			if (result.code == '100') { 
+				$('#empAddModal').modal('hide');
+				to_page(total_Pages);
+			}else{  //失败时显示错误信息
+				if (undefined != result.extend.errorFields.email) {			
+					show_validate_msg('#emp_email_input','error',result.extend.errorFields.email);
+				}
+				if (undefined != result.extend.errorFields.empName) {
+					show_validate_msg('#emp_name_input','error',result.extend.errorFields.empName);
 
-			if (result.code == '100') { alert('保存成功!')}
+				}
 
-			$('#empAddModal').modal('hide');
+			}
 
-			to_page(total_Pages);
+			
 
 		}
 	});
