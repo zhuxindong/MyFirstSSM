@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +25,9 @@ import com.ssm.crud.pojo.Msg;
 import com.ssm.crud.service.EmployeeService;
 
 /**
- * ´¦ÀíÔ±¹¤µÄCRUDÇëÇó
+ * å¤„ç†å‘˜å·¥çš„CRUDè¯·æ±‚
 * @author zhuxindong  E-mail:501801307@qq.com
-* @date ´´½¨Ê±¼ä£º2017Äê8ÔÂ28ÈÕ ÏÂÎç8:45:26
+* @date åˆ›å»ºæ—¶é—´ï¼š2017å¹´8æœˆ28æ—¥ ä¸‹åˆ8:45:26
 * @version 1.0
 */
 
@@ -38,8 +39,8 @@ public class EmployeeController {
 	
 	
 	/**
-	 * ·ÖÒ³²éÑ¯ËùÓĞÔ±¹¤ĞÅÏ¢£¬Á¬´øÆä²¿ÃÅĞÅÏ¢Ò»Æğ²éÑ¯
-	 * ÓÃÀ´·µ»ØjsonÊı¾İ
+	 * åˆ†é¡µæŸ¥è¯¢æ‰€æœ‰å‘˜å·¥ä¿¡æ¯ï¼Œè¿å¸¦å…¶éƒ¨é—¨ä¿¡æ¯ä¸€èµ·æŸ¥è¯¢
+	 * ç”¨æ¥è¿”å›jsonæ•°æ®
 	 * @param pn
 	 * @return
 	 */
@@ -48,7 +49,7 @@ public class EmployeeController {
 	public Msg getEmpsWithJson(@RequestParam(value="pn",defaultValue="1")Integer pn){
 		
 		/**
-		* ÀûÓÃpagehelper·ÖÒ³²å¼şÀ´·ÖÒ³
+		* åˆ©ç”¨pagehelperåˆ†é¡µæ’ä»¶æ¥åˆ†é¡µ
 		*/
 		PageHelper.startPage(pn, 5);
 		
@@ -69,10 +70,10 @@ public class EmployeeController {
 	
 
 	/**
-	 * ±£´æÒ»¸öĞÂÔ±¹¤
+	 * ä¿å­˜ä¸€ä¸ªæ–°å‘˜å·¥
 	 * 
-	 * 1.Ö§³ÖJSR303Ğ£Ñé
-	 * 2.µ¼ÈëHibernate-validator
+	 * 1.æ”¯æŒJSR303æ ¡éªŒ
+	 * 2.å¯¼å…¥Hibernate-validator
 	 * 
 	 * @param employee
 	 * @return
@@ -81,23 +82,23 @@ public class EmployeeController {
 	@ResponseBody
 	public Msg saveEmp(@Valid Employee employee,BindingResult result){
 		/*
-		 * ºóÌ¨¼ìÑéÊı¾İĞÅÏ¢
+		 * åå°æ£€éªŒæ•°æ®ä¿¡æ¯
 		 */
 		if (result.hasErrors()) {
 			/*
-			 * Èç¹ûĞ£ÑéÊ§°Ü£¬ÏÔÊ¾´íÎóĞÅÏ¢
+			 * å¦‚æœæ ¡éªŒå¤±è´¥ï¼Œæ˜¾ç¤ºé”™è¯¯ä¿¡æ¯
 			 */
 			Map<String, Object> errMap = new HashMap<String, Object>();
 			List<FieldError> errors = result.getFieldErrors();
 			for (FieldError fieldError : errors) {
 				/*
-				 * °Ñ´íÎóĞÅÏ¢·â×°³Émap¶ÔÏó
+				 * æŠŠé”™è¯¯ä¿¡æ¯å°è£…æˆmapå¯¹è±¡
 				 */
 				errMap.put(fieldError.getField(), fieldError.getDefaultMessage());
 			}
 			
 			/*
-			 * Ìá½»¸øä¯ÀÀÆ÷
+			 * æäº¤ç»™æµè§ˆå™¨
 			 */
 			return Msg.fail().add("errorFields", errMap);
 			
@@ -112,7 +113,7 @@ public class EmployeeController {
 
 	
 	/**
-	 * ²éÑ¯ĞÕÃûÊÇ·ñ¿ÉÓÃ
+	 * æŸ¥è¯¢å§“åæ˜¯å¦å¯ç”¨
 	 * @param empName
 	 * @return
 	 */
@@ -121,24 +122,40 @@ public class EmployeeController {
 	public Msg checkUser(@RequestParam(value="empName") String empName){
 		
 		/**
-		 * ÏÈÅĞ¶ÏÓÃ»§ÃûÊÇ·ñºÏ·¨
+		 * å…ˆåˆ¤æ–­ç”¨æˆ·åæ˜¯å¦åˆæ³•
 		 */
 		String regx = "(^[a-zA-Z0-9_-]{3,16}$)|(^[\u2E80-\u9FFF]{2,6})";
 		if (!empName.matches(regx)) {
-			return Msg.fail().add("msg", "ÓÃ»§Ãû±ØĞëÊÇ2µ½6Î»ÖĞÎÄ»ò3µ½16Î»Ó¢ÎÄºÍÊı×ÖµÄ×éºÏ");
+			return Msg.fail().add("msg", "ç”¨æˆ·åå¿…é¡»æ˜¯2åˆ°6ä½ä¸­æ–‡æˆ–3åˆ°16ä½è‹±æ–‡å’Œæ•°å­—çš„ç»„åˆ");
 		}
 		
 		/**
-		 * Êı¾İ¿âÓÃ»§ÃûÖØ¸´Ğ£Ñé
+		 * æ•°æ®åº“ç”¨æˆ·åé‡å¤æ ¡éªŒ
 		 */
 		boolean b = employeeService.chechUser(empName);
 		
 		if (b) {
 			return Msg.success();
 		}else {
-			return Msg.fail().add("msg", "ÓÃ»§Ãû²»¿ÉÓÃ");
+			return Msg.fail().add("msg", "ç”¨æˆ·åä¸å¯ç”¨");
 		}
 	}
+	
+	
+	@RequestMapping(value="/emp/{id}",method=RequestMethod.GET)
+	@ResponseBody
+	public Msg getEmp(@PathVariable("id") Integer id) {
+		
+		Employee employee = employeeService.getEmpById(id);
+		return Msg.success().add("emp", employee);
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

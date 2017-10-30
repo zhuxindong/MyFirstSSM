@@ -18,12 +18,13 @@ function build_emps_table(argument) {
 		 var gender = val.gender=='M'?'男':'女';
 		 var gender_td = $('<td></td>').append(gender);
 		 var email_td = $('<td></td>').append(val.email);
-		 var deptName_td = $('<td></td>').append(val.deptName);
+		 var deptName_td = $('<td></td>').append(val.department.deptName);
 
-		 var editBtn = $('<button></button>').addClass('btn btn-info btn-sm')
+		 var editBtn = $('<button></button>').addClass('btn btn-info btn-sm edit_btn')
 		 				.append($('<span></span>').addClass('glyphicon glyphicon-pencil')).append("编辑");
-
-		 var deleteBtn = $('<button></button>').addClass('btn btn-danger btn-sm')
+		// 为按钮添加一个自定义的属性，方便表示当前员工的id
+		 editBtn.attr("edit-id",val.empId);
+		 var deleteBtn = $('<button></button>').addClass('btn btn-danger btn-sm delete_btn')
 		 				.append($('<span></span>').addClass('glyphicon glyphicon-trash')).append("删除");
 
 		 var btn_td = $('<td></td>').append(editBtn).append(' ').append(deleteBtn);
@@ -334,3 +335,61 @@ function show_validate_msg(ele,status,msg) {
 }
 
 
+// 为编辑按钮绑定事件
+$(document).on("click",".edit_btn",function(){
+	// 查出员工信息并显示
+	getEmp($(this).attr("edit-id"));
+
+	// 查出部门信息并显示部门列表
+	$('#empUpdateModal form')[0].reset();
+		$.ajax({
+			url: 'depts',
+			type: 'GET',
+			success:function(result){
+	
+				$('#empUpdateModal select').empty();
+	
+				$.each(result.extend.depts, function(index, val) {
+					 /* iterate through array or object */
+					 var dept_option = $('<option></option>').append(val.deptName).attr('value',val.deptId);
+	
+					 dept_option.appendTo('#empUpdateModal select');
+				});
+	
+	
+			}
+		});
+	// 弹出模态框
+	$('#empUpdateModal').modal({
+		backdrop:'static'
+	});
+	
+})
+
+
+
+// 查询单个员工信息的方法
+function getEmp(id) {
+	$.ajax({
+		type: "GET",
+		url: "emp/"+id,
+		success: function (response) {
+			var empDate = response.extend.emp;
+
+			// 清空
+			$("#gender_add_update_m").removeAttr('checked');
+			$("#gender_add_update_f").removeAttr('checked');
+			// 构建
+			$('#emp_name_update').attr('value',empDate.empName);
+			$('#emp_email_update').val(empDate.email);
+			if (empDate.gender=='M') {
+				$("#gender_add_update_m").attr("checked","checked");
+			}
+			else{
+				$("#gender_add_update_f").attr("checked","checked");
+			}
+
+			$("#dept_select_update").val([empDate.dId]);
+		}
+	});
+}

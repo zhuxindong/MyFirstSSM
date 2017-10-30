@@ -13,7 +13,7 @@ import com.ssm.crud.service.DepartmentService;
 
 /**
 * @author zhuxindong  E-mail:501801307@qq.com
-* @date ´´½¨Ê±¼ä£º2017Äê9ÔÂ1ÈÕ ÏÂÎç4:19:11
+* @date åˆ›å»ºæ—¶é—´ï¼š2017å¹´9æœˆ1æ—¥ ä¸‹åˆ4:19:11
 * @version 1.0
 */
 
@@ -26,8 +26,8 @@ public class DepartmentController {
 	
 	
 	/**
-	 * ²éÑ¯ËùÓĞ²¿ÃÅĞÅÏ¢
-	 * ·µ»ØjsonÊı¾İ
+	 * æŸ¥è¯¢æ‰€æœ‰éƒ¨é—¨ä¿¡æ¯
+	 * è¿”å›jsonæ•°æ®
 	 * @return
 	 */
 	@RequestMapping("/depts")

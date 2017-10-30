@@ -5,25 +5,25 @@ import java.util.Map;
 
 /**
 * @author zhuxindong  E-mail:501801307@qq.com
-* @date ´´½¨Ê±¼ä£º2017Äê8ÔÂ30ÈÕ ÏÂÎç7:12:29
+* @date åˆ›å»ºæ—¶é—´ï¼š2017å¹´8æœˆ30æ—¥ ä¸‹åˆ7:12:29
 * @version 1.0
 */
 
 public class Msg {
 	
 	/**
-	 * ×´Ì¬Âë
-	 * 100-³É¹¦£»200-Ê§°Ü
+	 * çŠ¶æ€ç 
+	 * 100-æˆåŠŸï¼›200-å¤±è´¥
 	 */
 	private int code;
 	
 	/**
-	 * ÀúÊ·ĞÅÏ¢
+	 * å†å²ä¿¡æ¯
 	 */
 	private String msg;
 	
 	/**
-	 * ÓÃ»§·µ»ØµÄä¯ÀÀÆ÷Êı¾İ
+	 * ç”¨æˆ·è¿”å›çš„æµè§ˆå™¨æ•°æ®
 	 */
 	private Map<String, Object> extend = new HashMap<String, Object>();
 
@@ -57,7 +57,7 @@ public class Msg {
 		Msg result = new Msg();
 		
 		result.setCode(100);
-		result.setMsg("´¦Àí³É¹¦£¡");
+		result.setMsg("å¤„ç†æˆåŠŸï¼");
 		
 		return result;
 		
@@ -69,7 +69,7 @@ public class Msg {
 		Msg result = new Msg();
 		
 		result.setCode(200);
-		result.setMsg("´¦ÀíÊ§°Ü£¡");
+		result.setMsg("å¤„ç†å¤±è´¥ï¼");
 		
 		return result;
 		

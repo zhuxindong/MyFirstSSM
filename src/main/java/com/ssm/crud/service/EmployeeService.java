@@ -14,7 +14,7 @@ import com.ssm.crud.pojo.Msg;
 
 /**
 * @author zhuxindong  E-mail:501801307@qq.com
-* @date ´´½¨Ê±¼ä£º2017Äê8ÔÂ28ÈÕ ÏÂÎç8:49:09
+* @date ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º2017ï¿½ï¿½8ï¿½ï¿½28ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½8:49:09
 * @version 1.0
 */
 
@@ -25,7 +25,7 @@ public class EmployeeService {
 	private EmployeeMapper employeeMapper;
 	
 	/**
-	 * ²éÑ¯ËùÓÐÔ±¹¤(·ÖÒ³²éÑ¯)
+	 * ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½(ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯)
 	 * @return
 	 */
 	public List<Employee> getAll(){
@@ -36,7 +36,7 @@ public class EmployeeService {
 	
 	
 	/**
-	 * ±£´æÐÂÔ±¹¤
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½
 	 * @param employee
 	 */
 	public void saveEmp(Employee employee) {
@@ -46,9 +46,9 @@ public class EmployeeService {
 
 	
 	/**
-	 * ¼ìÑéÓÃ»§ÃûÊÇ·ñ¿ÉÓÃ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 	 * @param empName
-	 * @return true´ú±í¿ÉÓÃ
+	 * @return trueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public boolean chechUser(String empName) {
 		
@@ -60,6 +60,12 @@ public class EmployeeService {
 		long count = employeeMapper.countByExample(example);
 		
 		return count == 0;
+	}
+
+
+	public Employee getEmpById(Integer id) {
+		Employee employee = employeeMapper.selectByPrimaryKey(id);
+		return employee;
 	}
 	
 	
