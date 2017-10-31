@@ -359,6 +359,10 @@ $(document).on("click",".edit_btn",function(){
 	
 			}
 		});
+
+	// 把员工id传给模态框的更新按钮
+		$('#emp_update_btn').attr('edit-id', $(this).attr("edit-id"));
+
 	// 弹出模态框
 	$('#empUpdateModal').modal({
 		backdrop:'static'
@@ -393,3 +397,39 @@ function getEmp(id) {
 		}
 	});
 }
+
+
+// 点击更新，更新员工信息
+$(function(){
+
+	$('#emp_update_btn').click(function() {
+
+		// 校验邮箱信息
+		// var emp_email_up = $('#emp_email_update').val();
+		// var reg_email_up = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+		// if (!reg_email_up.test(emp_email_up)) {
+		// 	// alert("邮箱格式不正确！");
+		// 	show_validate_msg('#emp_email_update', 'error', '邮箱格式不正确！');
+
+		// 	return false;
+		// } else {
+
+		// 	show_validate_msg('#emp_email_update', 'success', '');
+
+		// }
+
+
+		// 发送ajax请求，更新员工信息
+		$.ajax({
+			type: "POST",
+			url: "emp/" + $(this).attr("edit-id"),
+			data: $('#empUpdateModal form').serialize()+'&_method=PUT',
+			success: function (response) {
+				console.log(response);
+			}
+		});
+
+
+		
+	})
+})

@@ -142,6 +142,11 @@ public class EmployeeController {
 	}
 	
 	
+	/**
+	 * 根据id查询员工
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/emp/{id}",method=RequestMethod.GET)
 	@ResponseBody
 	public Msg getEmp(@PathVariable("id") Integer id) {
@@ -152,6 +157,13 @@ public class EmployeeController {
 	}
 	
 	
+	@RequestMapping(value="/emp/{empId}",method=RequestMethod.PUT)
+	@ResponseBody
+	public Msg saveEmp(Employee employee) {
+		
+		employeeService.updateEmp(employee);
+		return Msg.success();
+	}
 	
 	
 	
