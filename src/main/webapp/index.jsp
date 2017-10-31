@@ -19,7 +19,6 @@
 <body>
 
 
-
 	<!-- 添加员工的模态框 -->
 	<div class="modal fade" id="empAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
@@ -71,13 +70,8 @@
 				  </select>
 			    </div>
 			</div>
-
 			  
 			</form>
-
-
-
-
 
 	      </div>
 	      <div class="modal-footer">
@@ -87,6 +81,8 @@
 	    </div>
 	  </div>
 	</div>
+
+
 
 	<!-- 修改员工的模态框 -->
 	<div class="modal fade" id="empUpdateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -138,14 +134,8 @@
 					  
 				  </select>
 			    </div>
-			</div>
-
-			  
+			</div>	  
 			</form>
-
-
-
-
 
 	      </div>
 	      <div class="modal-footer">
