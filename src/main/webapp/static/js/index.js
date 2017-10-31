@@ -428,8 +428,5 @@ $(function(){
 				console.log(response);
 			}
 		});
-
-
-		
 	})
 })
