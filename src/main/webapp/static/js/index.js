@@ -393,7 +393,7 @@ function getEmp(id) {
 				$("#gender_add_update_f").attr("checked","checked");
 			}
 
-			$("#dept_select_update").val([empDate.dId]);
+		 	$("#dept_select_update").val([empDate.dId]);
 		}
 	});
 }
